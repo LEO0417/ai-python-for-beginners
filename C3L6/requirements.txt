@@ -1,0 +1,15 @@
+# Python 初学者AI课程 - 第六课所需依赖
+# AI Python for Beginners - Lesson 6 Dependencies
+
+# Jupyter notebook support
+jupyter>=1.0.0
+ipykernel>=6.0.0
+
+# Display utilities
+IPython>=7.0.0
+
+# HTTP请求库 - HTTP requests library (for Ollama API)
+requests>=2.28.0
+
+# 注意：本课程现在集成了本地Ollama大模型
+# Note: This lesson now integrates with local Ollama LLM
