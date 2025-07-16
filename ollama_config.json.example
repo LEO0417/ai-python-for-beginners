@@ -1,0 +1,37 @@
+{
+  "default_model": "gemma3n:latest",
+  "description": "全局Ollama模型配置文件 / Global Ollama model configuration file",
+  "usage": "将此文件重命名为 ollama_config.json 来激活全局配置 / Rename this file to ollama_config.json to activate global configuration",
+  "priority_info": "配置优先级 / Configuration Priority: 环境变量 > 课程级配置 > 全局配置 > 自动检测 > 默认值",
+  "available_models": {
+    "gemma3n:latest": "默认模型，适合通用任务 / Default model, suitable for general tasks",
+    "llama2:latest": "通用对话模型，性能均衡 / General chat model, balanced performance",
+    "codellama:latest": "代码专用模型，适合编程任务 / Code-specific model, suitable for programming tasks",
+    "mistral:latest": "轻量级模型，速度较快 / Lightweight model, faster speed",
+    "qwen:latest": "中文优化模型，中文理解更好 / Chinese-optimized model, better Chinese understanding"
+  },
+  "configuration_methods": {
+    "environment_variable": {
+      "description": "环境变量配置（最高优先级）/ Environment variable configuration (highest priority)",
+      "example": "export OLLAMA_MODEL='llama2:latest'"
+    },
+    "lesson_config": {
+      "description": "课程级配置文件 / Lesson-level configuration file",
+      "location": "{lesson_folder}/ollama_config.json"
+    },
+    "global_config": {
+      "description": "全局配置文件 / Global configuration file",
+      "location": "ollama_config.json"
+    },
+    "programmatic": {
+      "description": "代码中动态设置 / Programmatic setting",
+      "example": "set_default_model('codellama:latest')"
+    }
+  },
+  "notes": [
+    "环境变量 OLLAMA_MODEL 的优先级最高 / Environment variable OLLAMA_MODEL has highest priority",
+    "课程级配置会覆盖全局配置 / Lesson-level config overrides global config",
+    "如果没有任何配置，系统会自动检测第一个可用模型 / If no configuration exists, system will auto-detect first available model",
+    "使用 shared_utils.show_model_info() 查看当前配置状态 / Use shared_utils.show_model_info() to check current configuration status"
+  ]
+}

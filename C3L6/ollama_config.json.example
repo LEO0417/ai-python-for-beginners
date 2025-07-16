@@ -1,0 +1,17 @@
+{
+  "default_model": "gemma3n:latest",
+  "description": "Ollama模型配置文件 / Ollama model configuration file",
+  "usage": "将此文件重命名为 ollama_config.json 来激活配置 / Rename this file to ollama_config.json to activate configuration",
+  "available_models": {
+    "gemma3n:latest": "默认模型，适合通用任务 / Default model, suitable for general tasks",
+    "llama2:latest": "通用对话模型，性能均衡 / General chat model, balanced performance",
+    "codellama:latest": "代码专用模型，适合编程任务 / Code-specific model, suitable for programming tasks",
+    "mistral:latest": "轻量级模型，速度较快 / Lightweight model, faster speed",
+    "qwen:latest": "中文优化模型，中文理解更好 / Chinese-optimized model, better Chinese understanding"
+  },
+  "notes": [
+    "环境变量 OLLAMA_MODEL 的优先级最高 / Environment variable OLLAMA_MODEL has highest priority",
+    "如果没有配置，系统会自动检测第一个可用模型 / If not configured, system will auto-detect first available model",
+    "使用 set_default_model() 函数可以动态修改配置 / Use set_default_model() function to dynamically modify configuration"
+  ]
+}

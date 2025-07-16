@@ -39,8 +39,9 @@
 2. WHEN 推断函数功能 THEN 系统 SHALL 根据notebook中的使用上下文推断函数的预期行为
 3. WHEN 创建新辅助函数 THEN 系统 SHALL 检查已有的helper_functions.py中是否存在可复用的函数
 4. WHEN 发现可复用函数 THEN 系统 SHALL 优先使用或扩展现有函数而非创建新函数
-5. WHEN 创建辅助函数 THEN 系统 SHALL 将所有函数统一放入helper_functions.py文件中
-6. WHEN 辅助函数需要大模型功能 THEN 系统 SHALL 配置使用ollama作为后端，选用gemma2:latest模型
+5. WHEN 创建辅助函数 THEN 系统 SHALL 使用项目根目录的helper_functions包，并在课程文件夹中创建代理文件
+6. WHEN 辅助函数需要大模型功能 THEN 系统 SHALL 配置使用ollama作为后端，选用gemma3n:latest模型
+7. WHEN 创建辅助函数 THEN 系统 SHALL 使用统一的helper_functions包结构，避免重复代码
 7. WHEN 创建辅助函数 THEN 系统 SHALL 添加适当的中文注释和文档字符串
 
 ### Requirement 4

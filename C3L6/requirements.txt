@@ -1,0 +1,16 @@
+# Python依赖包 / Python Dependencies
+# 本项目需要的Python包 / Python packages required for this project
+
+# 基础依赖 / Basic dependencies
+jupyter>=1.0.0
+ipython>=7.0.0
+
+# 用于显示Markdown内容 / For displaying Markdown content
+IPython>=7.0.0
+
+# 如果需要使用ollama进行LLM调用 / If ollama is needed for LLM calls
+# 请确保系统已安装ollama / Please ensure ollama is installed on your system
+# 安装命令 / Installation command: https://ollama.ai
+
+# 注意：本项目配置为使用base虚拟环境
+# Note: This project is configured to use the base virtual environment
