@@ -1,236 +1,246 @@
-# AI Python for Beginners - Bilingual Course
-# AI Python 初学者双语课程
+# AI Python for Beginners
+# AI Python 初学者教程
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange.svg)](https://jupyter.org/)
+这个项目提供了一系列Python和AI的入门教程，支持使用本地ollama大模型进行学习和实践。
 
-## 项目简介 / Project Overview
+This project provides a series of Python and AI beginner tutorials, supporting local ollama large language models for learning and practice.
 
-这是一个面向初学者的AI Python双语教学项目，提供中英文对照的Jupyter notebook课程。每个课程都包含完整的项目结构、辅助函数和实践练习，帮助学习者逐步掌握Python编程和AI应用开发。
+## 🚀 本地大模型设置指南 / Local LLM Setup Guide
 
-This is a bilingual AI Python tutorial project for beginners, providing Jupyter notebook courses with Chinese-English parallel content. Each lesson includes complete project structure, helper functions, and practical exercises to help learners gradually master Python programming and AI application development.
+### 📋 前提条件 / Prerequisites
 
-## 特色功能 / Key Features
+1. **安装Python 3.9+**
+2. **安装Ollama** - 从 [https://ollama.ai](https://ollama.ai) 下载并安装
 
-- **双语教学** / **Bilingual Learning**: 中英文对照，适合中文学习者
-- **实践导向** / **Practice-Oriented**: 每课都包含实际项目和练习
-- **AI集成** / **AI Integration**: 集成ollama本地LLM，学习AI应用开发
-- **完整项目结构** / **Complete Project Structure**: 每课都是独立的完整项目
-- **渐进式学习** / **Progressive Learning**: 从基础到进阶，循序渐进
+### 🔧 快速设置 / Quick Setup
 
-## 课程列表 / Course List
+#### 1. 安装Ollama / Install Ollama
 
-### 第一章 / Chapter 1
-- **C1L6**: 基础Python语法和数据类型 / Basic Python syntax and data types
-- **C1L7**: 控制流程和循环 / Control flow and loops  
-- **C1L9**: 数据结构和文件操作 / Data structures and file operations
-- **C1L10**: 错误处理和调试 / Error handling and debugging
-
-### 第三章 / Chapter 3
-- **C3L6**: 函数定义和重用 / Function definition and reuse
-
-## 快速开始 / Quick Start
-
-### 环境要求 / Prerequisites
-
-- Python 3.8+
-- Jupyter Notebook
-- ollama (可选，用于AI功能 / Optional, for AI features)
-
-### 安装步骤 / Installation
-
-1. **克隆项目** / **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd ai-python-bilingual-course
-   ```
-
-2. **安装依赖** / **Install dependencies**
-   ```bash
-   # 为每个课程安装依赖 / Install dependencies for each lesson
-   cd C1L6 && pip install -r requirements.txt && cd ..
-   cd C1L7 && pip install -r requirements.txt && cd ..
-   cd C1L9 && pip install -r requirements.txt && cd ..
-   cd C1L10 && pip install -r requirements.txt && cd ..
-   cd C3L6 && pip install -r requirements.txt && cd ..
-   ```
-
-3. **配置ollama (可选)** / **Setup ollama (Optional)**
-   ```bash
-   # 安装ollama / Install ollama
-   # 访问 https://ollama.ai 下载安装包
-   
-   # 拉取默认模型 / Pull default model
-   ollama pull gemma3n:latest
-   
-   # 或者拉取其他模型 / Or pull other models
-   # ollama pull llama2:latest
-   # ollama pull codellama:latest
-   
-   # 启动服务 / Start service
-   ollama serve
-   ```
-   
-   **智能模型配置** / **Smart Model Configuration**:
-   
-   本项目使用智能模型选择机制，按以下优先级自动选择模型：
-   
-   This project uses smart model selection with the following priority order:
-   
-   1. **环境变量** / **Environment Variable** (最高优先级 / Highest Priority)
-   2. **配置文件** / **Configuration File**
-   3. **自动检测** / **Auto Detection** (检测第一个可用模型 / Detect first available model)
-   4. **默认回退** / **Default Fallback** (`gemma3n:latest`)
-   
-   **方法1：环境变量配置** / **Method 1: Environment Variable** (推荐 / Recommended)
-   ```bash
-   # 设置环境变量 / Set environment variable
-   export OLLAMA_MODEL="llama2:latest"
-   jupyter notebook
-   
-   # 或者临时设置 / Or set temporarily
-   OLLAMA_MODEL="codellama:latest" jupyter notebook
-   ```
-   
-   **方法2：配置文件** / **Method 2: Configuration File**
-   ```python
-   # 在任意课程中运行以下代码 / Run the following code in any lesson
-   from helper_functions import set_default_model
-   
-   # 设置默认模型 / Set default model
-   set_default_model("llama2:latest")
-   
-   # 推荐的模型选择 / Recommended model options:
-   # set_default_model("llama2:latest")        # 通用对话模型 / General chat model
-   # set_default_model("codellama:latest")     # 代码专用模型 / Code-specific model  
-   # set_default_model("mistral:latest")       # 轻量级模型 / Lightweight model
-   # set_default_model("qwen:latest")          # 中文优化模型 / Chinese-optimized model
-   ```
-   
-   **方法3：自动检测** / **Method 3: Auto Detection**
-   
-   如果没有设置环境变量或配置文件，系统会自动使用 `ollama list` 中的第一个可用模型。
-   
-   If no environment variable or config file is set, the system will automatically use the first available model from `ollama list`.
-   
-   **检查当前使用的模型** / **Check Current Model**:
-   ```python
-   from helper_functions import get_default_model
-   print(f"当前使用的模型 / Current model: {get_default_model()}")
-   ```
-
-4. **测试配置 (可选)** / **Test Configuration (Optional)**
-   ```bash
-   # 运行配置测试脚本 / Run configuration test script
-   python test_model_config.py
-   ```
-
-5. **启动学习** / **Start Learning**
-   ```bash
-   # 进入任意课程文件夹 / Enter any lesson folder
-   cd C1L6
-   
-   # 启动Jupyter notebook / Start Jupyter notebook
-   jupyter notebook C1L6_Bilingual.ipynb
-   ```
-
-## 项目结构 / Project Structure
-
-```
-ai-python-bilingual-course/
-├── README.md                    # 项目主说明 / Main project documentation
-├── LICENSE                      # 开源许可证 / Open source license
-├── CONTRIBUTING.md             # 贡献指南 / Contribution guidelines
-├── CODE_OF_CONDUCT.md          # 行为准则 / Code of conduct
-├── helper_functions/            # 共享辅助函数包 / Shared helper functions package
-│   ├── __init__.py             # 包初始化文件 / Package initialization
-│   ├── llm_utils.py           # LLM相关功能 / LLM related functions
-│   ├── model_config.py        # 模型配置管理 / Model configuration management
-│   └── common_utils.py        # 通用工具函数 / Common utility functions
-├── ollama_config.json.example  # 全局配置示例 / Global config example
-├── test_model_config.py        # 配置测试脚本 / Configuration test script
-├── .kiro/                      # Kiro AI助手配置 / Kiro AI assistant config
-│   └── specs/                  # 项目规格文档 / Project specifications
-├── C1L6/                       # 第1章第6课 / Chapter 1 Lesson 6
-│   ├── C1L6_Bilingual.ipynb   # 双语notebook / Bilingual notebook
-│   ├── requirements.txt        # 依赖文件 / Dependencies
-│   └── README.md              # 课程说明 / Lesson documentation
-├── C1L7/                       # 第1章第7课 / Chapter 1 Lesson 7
-├── C1L9/                       # 第1章第9课 / Chapter 1 Lesson 9
-├── C1L10/                      # 第1章第10课 / Chapter 1 Lesson 10
-└── C3L6/                       # 第3章第6课 / Chapter 3 Lesson 6
-    ├── C3L6_Bilingual.ipynb   # 双语notebook / Bilingual notebook
-    ├── requirements.txt        # 依赖文件 / Dependencies
-    ├── README.md              # 课程说明 / Lesson documentation
-    ├── cape_town.txt          # 示例数据文件 / Sample data files
-    ├── paris.txt
-    ├── sydney.txt
-    ├── tokyo.txt
-    └── istanbul.txt
+**macOS/Linux:**
+```bash
+curl -fsSL https://ollama.ai/install.sh | sh
 ```
 
-## 学习路径 / Learning Path
+**Windows:**
+从官网下载安装包：https://ollama.ai/download
 
-### 建议学习顺序 / Recommended Learning Order
+#### 2. 下载推荐模型 / Download Recommended Models
 
-1. **C1L6**: Python基础语法 / Python basic syntax
-2. **C1L7**: 控制结构 / Control structures  
-3. **C1L9**: 数据处理 / Data processing
-4. **C1L10**: 错误处理 / Error handling
-5. **C3L6**: 函数编程 / Function programming
+```bash
+# 小型快速模型 (推荐初学者) / Small fast model (recommended for beginners)
+ollama pull qwen3:0.6b
 
-### 学习建议 / Learning Tips
+# 中等性能模型 / Medium performance model  
+ollama pull gemma3n:latest
 
-- 每课都包含理论讲解和实践练习 / Each lesson includes theory and practice
-- 建议按顺序学习，每课都有前置知识要求 / Follow the sequence as each lesson builds on previous ones
-- 充分利用双语对照，加深理解 / Make full use of bilingual content for better understanding
-- 动手实践所有代码示例 / Practice all code examples hands-on
-- 完成每课的练习题 / Complete exercises in each lesson
+# 大型高性能模型 / Large high-performance model
+ollama pull llama3.1:8b
+```
 
-## 技术栈 / Tech Stack
+#### 3. 启动Ollama服务 / Start Ollama Service
 
-- **Python 3.8+**: 主要编程语言 / Main programming language
-- **Jupyter Notebook**: 交互式学习环境 / Interactive learning environment
-- **ollama**: 本地LLM后端 / Local LLM backend
-- **gemma3n**: 默认AI模型 / Default AI model
+```bash
+ollama serve
+```
 
-## 贡献 / Contributing
+#### 4. 配置项目 / Configure Project
 
-我们欢迎各种形式的贡献！请查看 [CONTRIBUTING.md](CONTRIBUTING.md) 了解详细信息。
+克隆项目并配置：
+```bash
+git clone <this-repository>
+cd ai-python-for-beginners
 
-We welcome contributions of all kinds! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+# 复制配置文件模板 / Copy config template
+cp ollama_config.json.example ollama_config.json
 
-### 贡献方式 / Ways to Contribute
+# 编辑配置文件，设置你选择的模型 / Edit config file with your chosen model
+```
 
-- 报告问题 / Report bugs
-- 提出功能建议 / Suggest features
-- 改进文档 / Improve documentation
-- 添加新课程 / Add new lessons
-- 优化翻译 / Improve translations
+在 `ollama_config.json` 中设置你的模型：
+```json
+{
+  "default_model": "qwen3:0.6b"
+}
+```
 
-## 许可证 / License
+### 🎯 模型选择建议 / Model Selection Guide
 
-本项目采用 MIT 许可证。详见 [LICENSE](LICENSE) 文件。
+| 模型 / Model | 大小 / Size | 速度 / Speed | 质量 / Quality | 适用场景 / Use Case |
+|--------------|-------------|--------------|----------------|---------------------|
+| `qwen3:0.6b` | 522MB | ⚡⚡⚡ | ⭐⭐⭐ | 初学者、快速测试 / Beginners, Quick testing |
+| `gemma3n:latest` | 7.5GB | ⚡⚡ | ⭐⭐⭐⭐ | 日常使用、课程练习 / Daily use, Course exercises |
+| `llama3.1:8b` | ~4.7GB | ⚡ | ⭐⭐⭐⭐⭐ | 高质量对话、复杂任务 / High-quality chat, Complex tasks |
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+### 📦 安装依赖 / Install Dependencies
 
-## 支持 / Support
+```bash
+# 全局依赖 / Global dependencies
+pip install -r requirements.txt
 
-如果你在使用过程中遇到问题，可以通过以下方式获取帮助：
+# 或进入具体课程目录 / Or enter specific lesson directory
+cd C1L9
+pip install -r requirements.txt
+```
 
-If you encounter any issues, you can get help through:
+### 🧪 测试设置 / Test Setup
 
-- 提交 Issue / Submit an Issue
-- 查看课程README / Check lesson README files
-- 参考技术文档 / Refer to technical documentation
+运行测试脚本验证配置：
+```python
+# 测试连接 / Test connection
+from helper_functions import print_llm_response, get_default_model
 
-## 致谢 / Acknowledgments
+print(f"当前模型 / Current model: {get_default_model()}")
+print_llm_response("Hello, this is a test!")
+```
 
-感谢所有为这个项目做出贡献的开发者和学习者。
+### ⚙️ 高级配置 / Advanced Configuration
 
-Thanks to all developers and learners who have contributed to this project.
+#### 切换模型 / Switch Models
+
+```python
+from helper_functions import set_default_model, get_available_models
+
+# 查看可用模型 / View available models
+print(get_available_models())
+
+# 切换到其他模型 / Switch to another model
+set_default_model("gemma3n:latest")
+```
+
+#### 课程级配置 / Lesson-level Configuration
+
+你可以为每个课程设置不同的模型：
+```bash
+cd C1L9
+echo '{"default_model": "qwen3:0.6b"}' > ollama_config.json
+```
+
+#### 环境变量配置 / Environment Variable Configuration
+
+```bash
+# 临时设置 / Temporary setting
+export OLLAMA_MODEL="llama3.1:8b"
+
+# 永久设置 (添加到 ~/.bashrc 或 ~/.zshrc) / Permanent setting
+echo 'export OLLAMA_MODEL="qwen3:0.6b"' >> ~/.zshrc
+```
+
+### 🔍 故障排除 / Troubleshooting
+
+#### 常见问题 / Common Issues
+
+1. **模型未找到 / Model not found**
+   ```bash
+   ollama list  # 查看已安装模型 / Check installed models
+   ollama pull <model-name>  # 下载缺失模型 / Download missing model
+   ```
+
+2. **连接超时 / Connection timeout**
+   ```bash
+   ollama serve  # 确保服务正在运行 / Ensure service is running
+   ```
+
+3. **权限问题 / Permission issues**
+   ```bash
+   sudo chown -R $USER ~/.ollama  # 修复权限 / Fix permissions
+   ```
+
+#### 诊断工具 / Diagnostic Tools
+
+```python
+from helper_functions import show_model_info, test_llm_connection
+
+# 显示详细配置信息 / Show detailed config info
+show_model_info()
+
+# 测试连接状态 / Test connection status
+is_connected = test_llm_connection()
+print(f"连接状态 / Connection status: {is_connected}")
+```
+
+### 💡 性能优化建议 / Performance Optimization Tips
+
+1. **选择合适的模型大小** / Choose appropriate model size
+   - 学习阶段：使用 `qwen3:0.6b` (快速响应)
+   - 日常使用：使用 `gemma3n:latest` (平衡性能)
+   - 高质量需求：使用 `llama3.1:8b` (最佳质量)
+
+2. **系统资源建议** / System Resource Recommendations
+   - 内存：至少8GB (推荐16GB+)
+   - 存储：至少10GB可用空间
+   - CPU：现代多核处理器
+
+3. **网络设置** / Network Settings
+   - 首次下载模型需要良好的网络连接
+   - 后续使用完全离线
+
+### 📚 使用示例 / Usage Examples
+
+#### 基础使用 / Basic Usage
+```python
+from helper_functions import print_llm_response
+
+# 简单对话 / Simple conversation
+print_llm_response("What is Python?")
+
+# 使用变量 / Using variables
+name = "Alice"
+age = 25
+print_llm_response(f"Tell me about a {age}-year-old person named {name}")
+```
+
+#### 课程练习 / Course Exercises
+```python
+# C1L9 示例 / C1L9 Example
+name = "Otto Matic"
+dog_age = 21/7
+print_llm_response(f"""If {name} were a dog, he would be {dog_age} years old.
+Describe what life stage that would be for a dog.""")
+```
+
+### 🆘 获得帮助 / Getting Help
+
+如果遇到问题，请：
+1. 查看上述故障排除部分
+2. 运行诊断工具
+3. 检查ollama官方文档：https://ollama.ai/
+4. 提交Issue到项目仓库
+
+If you encounter issues:
+1. Check the troubleshooting section above
+2. Run diagnostic tools
+3. Check ollama official docs: https://ollama.ai/
+4. Submit an issue to the project repository
 
 ---
 
-**开始你的AI Python学习之旅吧！/ Start your AI Python learning journey!** 🚀
+## 🎓 课程目录 / Course Contents
+
+- **C1L6**: Python基础 / Python Basics
+- **C1L7**: 数据类型 / Data Types  
+- **C1L9**: 变量与LLM提示 / Variables and LLM Prompts
+- **C1L10**: 函数与控制流 / Functions and Control Flow
+- **C2L1-C2L7**: 中级Python / Intermediate Python
+- **C3L6**: 高级应用 / Advanced Applications
+
+每个课程目录包含：
+- Jupyter Notebook (.ipynb)
+- 辅助函数 (helper_functions.py)
+- 依赖文件 (requirements.txt)
+- 说明文档 (README.md)
+
+Each lesson directory contains:
+- Jupyter Notebook (.ipynb)
+- Helper functions (helper_functions.py)
+- Dependencies (requirements.txt)  
+- Documentation (README.md)
+
+## 🤝 贡献 / Contributing
+
+欢迎贡献代码、报告问题或提出建议！
+Welcome to contribute code, report issues, or suggest improvements!
+
+## 📄 许可证 / License
+
+请查看 LICENSE 文件了解详情。
+See LICENSE file for details.
