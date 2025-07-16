@@ -1,0 +1,10 @@
+# Requirements for C1L6 - Data in Python
+# 第6课 - Python中的数据 的依赖项
+
+# This lesson uses only built-in Python functions
+# No additional packages are required
+# 本课程仅使用Python内置函数
+# 不需要额外的包
+
+# Base Python 3.9+ is sufficient
+# Python 3.9+ 基础版本即可满足需求

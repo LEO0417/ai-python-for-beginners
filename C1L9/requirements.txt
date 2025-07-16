@@ -1,0 +1,14 @@
+# Python依赖包 - Python Dependencies
+# 本课程所需的Python包列表
+# List of Python packages required for this lesson
+
+# 核心依赖 - Core Dependencies
+jupyter>=1.0.0          # Jupyter Notebook环境 / Jupyter Notebook environment
+ipykernel>=6.0.0        # Python内核支持 / Python kernel support
+
+# 可选依赖 - Optional Dependencies  
+# 如果系统安装了ollama，可以使用本地LLM模型
+# If ollama is installed on the system, local LLM models can be used
+
+# 注意：本课程使用Python内置模块调用Ollama命令行工具
+# Note: This lesson uses Python built-in modules to call Ollama command line tool
