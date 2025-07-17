@@ -202,6 +202,20 @@ def feet_to_meters(feet):
     """
     return feet / 3.28084
 
+def read_journal(file_path, encoding='utf-8'):
+    """
+    读取日记文件内容
+    Read journal file contents
+
+    Args:
+        file_path (str): 文件路径 / File path
+        encoding (str): 文件编码 / File encoding
+
+    Returns:
+        str: 日记内容 / Journal content
+    """
+    return read_text_file(file_path, encoding)
+
 def format_file_size(size_bytes):
     """
     格式化文件大小

@@ -30,9 +30,10 @@ try:
     # 提供向后兼容的接口 / Provide backward compatibility interface
     __all__ = [
         'get_default_model',
-        'set_default_model', 
+        'set_default_model',
         'print_llm_response',
-        'get_llm_response'
+        'get_llm_response',
+        'read_journal'
     ]
     
 except ImportError as e:
