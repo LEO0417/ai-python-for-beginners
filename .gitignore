@@ -197,8 +197,6 @@ $RECYCLE.BIN/
 .nfs*
 
 # Project specific
-# Raw notebook folder (processed files are moved to lesson folders)
-raw notebook/
 
 # Ollama logs
 ollama.log
