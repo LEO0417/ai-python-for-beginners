@@ -2,7 +2,7 @@
 
 ## Introduction
 
-本功能旨在创建一个可重复执行的任务，能够处理raw notebook文件夹中的Jupyter notebook文件，将其翻译成双语版本（英文+中文），并创建完整的项目结构。每个notebook将被组织到独立的文件夹中，使用ollama作为大模型后端，并配置为使用base虚拟环境。
+本功能旨在创建一个可重复执行的任务，能够处理raw notebook文件夹中的Jupyter notebook文件，将其翻译成双语版本（英文+中文），并创建完整的项目结构。每个notebook将被组织到独立的文件夹中，使用ollama作为大模型后端，并配置为使用base虚拟环境。原始文件将被保留以供参考。
 
 ## Requirements
 
@@ -26,8 +26,8 @@
 
 1. WHEN 处理notebook文件 THEN 系统 SHALL 为每个lesson创建独立的文件夹（如C3L6, C3L7等）
 2. WHEN 创建项目结构 THEN 系统 SHALL 将双语notebook放置在对应的文件夹中
-3. WHEN 完成处理 THEN 系统 SHALL 删除raw notebook文件夹中的原始文件
-4. WHEN 创建文件夹 THEN 系统 SHALL 使用标准化的命名约定（C3L{lesson_number}）
+3. WHEN 完成处理 THEN 系统 SHALL 保留raw notebook文件夹中的原始文件以供参考和备份
+4. WHEN 创建文件夹 THEN 系统 SHALL 使用标准化的命名约定（C{course}L{lesson_number}，如C2L1, C2L2等）
 
 ### Requirement 3
 
@@ -53,7 +53,8 @@
 1. WHEN 创建项目结构 THEN 系统 SHALL 生成requirements.txt文件包含所需依赖
 2. WHEN 配置环境 THEN 系统 SHALL 设置notebook使用base虚拟环境
 3. WHEN 需要数据文件 THEN 系统 SHALL 创建相应的数据文件（如城市描述文件）
-4. WHEN 创建README THEN 系统 SHALL 提供项目说明和使用指南
+4. WHEN 创建README THEN 系统 SHALL 提供详细的项目说明和使用指南，包括双语内容
+5. WHEN 创建helper_functions THEN 系统 SHALL 在每个课程文件夹中创建代理文件，指向根目录的helper_functions包
 
 ### Requirement 5
 
@@ -65,3 +66,16 @@
 2. WHEN 处理代码示例 THEN 系统 SHALL 保持代码的可执行性
 3. WHEN 创建练习题 THEN 系统 SHALL 提供中文说明和提示
 4. WHEN 完成翻译 THEN 系统 SHALL 验证notebook能够正常运行
+
+### Requirement 6
+
+**User Story:** 作为开发者，我希望优化helper_functions包的结构和功能，以便支持所有课程的需求。
+
+#### Acceptance Criteria
+
+1. WHEN 分析notebook需求 THEN 系统 SHALL 识别缺失的辅助函数
+2. WHEN 实现辅助函数 THEN 系统 SHALL 在根目录的helper_functions包中添加函数
+3. WHEN 添加函数 THEN 系统 SHALL 提供read_journal()函数用于读取日志文件
+4. WHEN 添加函数 THEN 系统 SHALL 提供display_html()函数用于在Jupyter中显示HTML内容
+5. WHEN 更新包结构 THEN 系统 SHALL 确保所有新函数都在__init__.py中正确导出
+6. WHEN 创建课程文件夹 THEN 系统 SHALL 使用代理文件模式避免重复代码

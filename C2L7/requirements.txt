@@ -1,0 +1,18 @@
+# Requirements for C2L7
+# 本课程的依赖项
+
+# This lesson uses only built-in Python functions and helper functions
+# No additional packages are required for core functionality
+# 本课程仅使用Python内置函数和辅助函数
+# 核心功能不需要额外的包
+
+# Base Python 3.9+ is sufficient
+# Python 3.9+ 基础版本即可满足需求
+
+# Optional: For LLM functionality (handled by helper_functions)
+# 可选：LLM功能（由helper_functions处理）
+# ollama (system-level installation required)
+# subprocess (built-in)
+# json (built-in)
+# os (built-in)
+# sys (built-in)

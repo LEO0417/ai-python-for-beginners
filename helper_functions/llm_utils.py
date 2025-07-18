@@ -10,6 +10,7 @@ Provides functions for interacting with Large Language Models
 import subprocess
 import sys
 import os
+from typing import Dict, Any, Union
 try:
     from .model_config import get_default_model
 except ImportError:
@@ -21,7 +22,7 @@ except ImportError:
     sys.path.insert(0, current_dir)
     from model_config import get_default_model
 
-def print_llm_response(prompt):
+def print_llm_response(prompt: str) -> None:
     """
     使用本地Ollama模型生成并打印LLM响应
     Generate and print LLM response using local Ollama model
@@ -35,7 +36,7 @@ def print_llm_response(prompt):
     response = get_llm_response(prompt)
     print(response)
 
-def get_llm_response(prompt):
+def get_llm_response(prompt: str) -> str:
     """
     获取LLM响应
     Get LLM response
@@ -107,7 +108,7 @@ def get_llm_response(prompt):
         print(f"❌ 调用ollama时出错，使用模拟响应 / Error calling ollama, using simulated response: {e}")
         return _get_fallback_response(prompt)
 
-def _get_fallback_response(prompt):
+def _get_fallback_response(prompt: str) -> str:
     """
     当ollama不可用时的备用响应函数
     Fallback response function when ollama is not available
@@ -214,7 +215,7 @@ Since Ollama service is currently unavailable, I'm providing this simulated resp
 2. {current_model} model is downloaded (ollama pull {current_model})  
 3. Ollama service is running"""
 
-def test_llm_connection():
+def test_llm_connection() -> bool:
     """
     测试LLM连接状态
     Test LLM connection status
@@ -228,7 +229,7 @@ def test_llm_connection():
     except Exception:
         return False
 
-def get_model_info():
+def get_model_info() -> Dict[str, Union[str, bool]]:
     """
     获取当前模型信息
     Get current model information

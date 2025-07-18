@@ -10,8 +10,9 @@ Provides common helper functions and utilities
 import os
 import json
 from datetime import datetime
+from typing import Dict, Any, List, Optional, Union
 
-def read_text_file(file_path, encoding='utf-8'):
+def read_text_file(file_path: str, encoding: str = 'utf-8') -> str:
     """
     读取文本文件
     Read text file
@@ -30,7 +31,7 @@ def read_text_file(file_path, encoding='utf-8'):
         print(f"❌ 读取文件失败 / Failed to read file {file_path}: {e}")
         return ""
 
-def write_text_file(file_path, content, encoding='utf-8'):
+def write_text_file(file_path: str, content: str, encoding: str = 'utf-8') -> bool:
     """
     写入文本文件
     Write text file
@@ -54,7 +55,7 @@ def write_text_file(file_path, content, encoding='utf-8'):
         print(f"❌ 写入文件失败 / Failed to write file {file_path}: {e}")
         return False
 
-def load_json_file(file_path):
+def load_json_file(file_path: str) -> Dict[str, Any]:
     """
     加载JSON文件
     Load JSON file
@@ -72,7 +73,7 @@ def load_json_file(file_path):
         print(f"❌ 加载JSON文件失败 / Failed to load JSON file {file_path}: {e}")
         return {}
 
-def save_json_file(file_path, data):
+def save_json_file(file_path: str, data: Dict[str, Any]) -> bool:
     """
     保存JSON文件
     Save JSON file
@@ -95,7 +96,7 @@ def save_json_file(file_path, data):
         print(f"❌ 保存JSON文件失败 / Failed to save JSON file {file_path}: {e}")
         return False
 
-def get_project_info():
+def get_project_info() -> Dict[str, Any]:
     """
     获取项目信息
     Get project information
@@ -127,7 +128,7 @@ def get_project_info():
     
     return info
 
-def list_lessons():
+def list_lessons() -> List[str]:
     """
     列出所有课程文件夹
     List all lesson folders
@@ -150,7 +151,7 @@ def list_lessons():
     
     return lessons
 
-def celsius_to_fahrenheit(celsius):
+def celsius_to_fahrenheit(celsius: float) -> float:
     """
     摄氏度转华氏度
     Convert Celsius to Fahrenheit
@@ -163,7 +164,7 @@ def celsius_to_fahrenheit(celsius):
     """
     return celsius * 9/5 + 32
 
-def fahrenheit_to_celsius(fahrenheit):
+def fahrenheit_to_celsius(fahrenheit: float) -> float:
     """
     华氏度转摄氏度
     Convert Fahrenheit to Celsius
@@ -176,7 +177,7 @@ def fahrenheit_to_celsius(fahrenheit):
     """
     return (fahrenheit - 32) * 5/9
 
-def meters_to_feet(meters):
+def meters_to_feet(meters: float) -> float:
     """
     米转英尺
     Convert meters to feet
@@ -189,7 +190,7 @@ def meters_to_feet(meters):
     """
     return meters * 3.28084
 
-def feet_to_meters(feet):
+def feet_to_meters(feet: float) -> float:
     """
     英尺转米
     Convert feet to meters
@@ -202,7 +203,7 @@ def feet_to_meters(feet):
     """
     return feet / 3.28084
 
-def format_file_size(size_bytes):
+def format_file_size(size_bytes: int) -> str:
     """
     格式化文件大小
     Format file size
@@ -224,7 +225,7 @@ def format_file_size(size_bytes):
     
     return f"{size_bytes:.1f}{size_names[i]}"
 
-def get_file_info(file_path):
+def get_file_info(file_path: str) -> Dict[str, Any]:
     """
     获取文件信息
     Get file information
@@ -250,3 +251,73 @@ def get_file_info(file_path):
             'error': str(e),
             'exists': False
         }
+
+def read_journal(filename: str) -> str:
+    """
+    读取日志文件
+    Read journal file
+    
+    Args:
+        filename (str): 日志文件名 / Journal filename
+        
+    Returns:
+        str: 日志内容 / Journal content
+    """
+    try:
+        # 首先尝试相对路径
+        # First try relative path
+        if os.path.exists(filename):
+            return read_text_file(filename)
+        
+        # 如果不存在，尝试在journal_entries目录中查找
+        # If not found, try to find in journal_entries directory
+        journal_path = os.path.join("journal_entries", filename)
+        if os.path.exists(journal_path):
+            return read_text_file(journal_path)
+        
+        # 如果还是找不到，尝试在当前目录查找
+        # If still not found, try in current directory
+        current_dir = os.getcwd()
+        full_path = os.path.join(current_dir, filename)
+        if os.path.exists(full_path):
+            return read_text_file(full_path)
+        
+        # 最后尝试在项目根目录查找
+        # Finally try in project root
+        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        root_path = os.path.join(project_root, filename)
+        if os.path.exists(root_path):
+            return read_text_file(root_path)
+            
+        return f"Journal file '{filename}' not found. Please ensure the file exists in the current directory or journal_entries folder."
+        
+    except Exception as e:
+        return f"Error reading journal file '{filename}': {e}"
+
+def display_html(html_content: str) -> None:
+    """
+    在Jupyter notebook中显示HTML内容
+    Display HTML content in Jupyter notebook
+    
+    Args:
+        html_content (str): HTML内容 / HTML content
+    """
+    try:
+        # 尝试导入IPython显示模块
+        # Try to import IPython display module
+        from IPython.display import HTML, display
+        display(HTML(html_content))
+    except ImportError:
+        # 如果不在Jupyter环境中，打印HTML内容
+        # If not in Jupyter environment, print HTML content
+        print("HTML Content:")
+        print("=" * 50)
+        print(html_content)
+        print("=" * 50)
+        print("Note: For proper HTML rendering, please run this in a Jupyter notebook environment.")
+    except Exception as e:
+        print(f"Error displaying HTML: {e}")
+        print("HTML Content:")
+        print("=" * 50)
+        print(html_content)
+        print("=" * 50)

@@ -10,8 +10,9 @@ Provides intelligent ollama model configuration and management
 import os
 import json
 import subprocess
+from typing import Optional, List, Dict, Any, Literal
 
-def get_default_model():
+def get_default_model() -> str:
     """
     智能获取默认模型，按优先级顺序：
     1. 环境变量 OLLAMA_MODEL
@@ -54,7 +55,7 @@ def get_default_model():
     # 5. 回退到默认值 / Fallback to default
     return "gemma3n:latest"
 
-def _get_lesson_config_model():
+def _get_lesson_config_model() -> Optional[str]:
     """从课程级配置文件读取模型设置 / Read model setting from lesson-level config file"""
     try:
         # 尝试找到当前课程的配置文件
@@ -70,7 +71,7 @@ def _get_lesson_config_model():
         pass
     return None
 
-def _get_global_config_model():
+def _get_global_config_model() -> Optional[str]:
     """从全局配置文件读取模型设置 / Read model setting from global config file"""
     try:
         # 查找项目根目录的配置文件
@@ -86,7 +87,7 @@ def _get_global_config_model():
         pass
     return None
 
-def _get_first_available_model():
+def _get_first_available_model() -> Optional[str]:
     """自动检测第一个可用的ollama模型 / Auto-detect first available ollama model"""
     try:
         result = subprocess.run(['ollama', 'list'], 
@@ -104,12 +105,12 @@ def _get_first_available_model():
         pass
     return None
 
-def _get_project_root():
+def _get_project_root() -> str:
     """获取项目根目录 / Get project root directory"""
     current_dir = os.path.dirname(os.path.abspath(__file__))
     return os.path.dirname(current_dir)
 
-def set_default_model(model_name, scope='global'):
+def set_default_model(model_name: str, scope: Literal['global', 'lesson'] = 'global') -> None:
     """
     设置默认模型到配置文件
     Set default model to config file
@@ -151,7 +152,7 @@ def set_default_model(model_name, scope='global'):
     except Exception as e:
         print(f"❌ 保存配置失败 / Failed to save config: {e}")
 
-def get_available_models():
+def get_available_models() -> List[str]:
     """
     获取所有可用的ollama模型列表
     Get list of all available ollama models
@@ -175,7 +176,7 @@ def get_available_models():
         pass
     return []
 
-def show_model_info():
+def show_model_info() -> None:
     """显示当前模型配置信息 / Show current model configuration info"""
     print("🔍 当前模型配置信息 / Current Model Configuration Info")
     print("=" * 50)

@@ -9,10 +9,11 @@ This package provides shared helper functions and utilities for all lessons
 
 import os
 import sys
+from typing import List, Optional
 
 # 自动添加项目根目录到Python路径
 # Automatically add project root to Python path
-def _setup_path():
+def _setup_path() -> None:
     """设置Python路径以支持从任意位置导入 / Setup Python path for imports from any location"""
     current_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(current_dir)
@@ -32,7 +33,9 @@ try:
         'get_default_model',
         'set_default_model', 
         'print_llm_response',
-        'get_llm_response'
+        'get_llm_response',
+        'read_journal',
+        'display_html'
     ]
     
 except ImportError as e:
@@ -46,7 +49,7 @@ __version__ = "1.0.0"
 __author__ = "AI Python Bilingual Course Team"
 
 # 使用说明 / Usage instructions
-def show_usage():
+def show_usage() -> None:
     """显示使用说明 / Show usage instructions"""
     print("""
 🚀 AI Python双语课程 - 共享工具包使用说明
@@ -77,10 +80,10 @@ LLM调用 / LLM Calls:
     """)
 
 # 便捷函数 / Convenience functions
-def version():
+def version() -> str:
     """返回版本信息 / Return version information"""
     return __version__
 
-def help():
+def help() -> None:
     """显示帮助信息 / Show help information"""
     show_usage()
